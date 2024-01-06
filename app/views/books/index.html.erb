@@ -1,0 +1,63 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h1>User info</h1>
+        <%= image_tag @user.get_profile_image(100,100) %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th><%= @user.name %></th>
+              <th>introduction</th>
+              <th><%= @user.introduction %></th>
+            </tr>
+          </thead>
+        </table>
+        <div class="row">
+          <%= link_to edit_user_path(@user) do %>
+            <i class="fa-solid fa-user-gear"></i>
+          <% end %>
+        </div>
+        
+        <h2 class="mt-3">New book</h2>
+          <%= render 'books/errors', book: @book %>
+          <%= form_with(model: @book, url: books_path) do |form| %>
+            <%= render 'books/list', form: form %>
+          <% end %>
+      </div>
+    
+    
+      <div class="col-md-8 offset-md-1">
+        <div class="row">
+          <h1>Books</h1>
+        </div>
+        <div class="row">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Opinion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @books.each do |book| %>
+                <tr>
+                  <td>
+                    <%= link_to user_path(book.user) do %>
+                      <%= image_tag(book.user.get_profile_image(100,100)) %>
+                    <% end %>
+                    <%= book.user.name %>
+                  </td>
+                  <td><%= link_to book.title, book_path(book) %></td>
+                  <td><%= book.body %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

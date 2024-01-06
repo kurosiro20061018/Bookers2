@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/c0cf8a90ba.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+
+ <body class="d-flex flex-column vh-100">
+   <script src="https://kit.fontawesome.com/c0cf8a90ba.js" crossorigin="anonymous"></script>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <ul>
+            <%= link_to "Bookers" , top_path %>
+          </ul>
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <i class="fa-solid fa-house"></i>
+              <%= link_to "Home", new_user_session_url %>
+            </li>
+            <li class="nav-item">
+              <i class="fa-solid fa-users"></i>
+              <%= link_to "Users" ,users_path %>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-book-open"></i>
+              <%= link_to "Books", books_path %>
+            </li>
+            <li class="nav-item">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <i class="fa-solid fa-house"></i>
+              <%= link_to "Home" ,  top_path %>
+            </li>
+            <li class="nav-item">
+              <i class="fa-solid fa-link"></i>
+              <%= link_to "About", about_path %>
+            </li>
+            <li class="nav-item">
+              <i class="fa-solid fa-user-plus"></i>
+              <%= link_to "Sign up", new_user_registration_path %>
+            </li>
+            <li class="nav-item">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <%= link_to "Log in", new_user_session_path %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
+      <p id = "notice"><%= notice %></p>
+    <%= yield %>
+    </main>
+  </body>
+
